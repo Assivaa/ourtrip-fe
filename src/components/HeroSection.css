@@ -69,4 +69,15 @@ video {
   .btn {
     width: 100%;
   }
+
+  .button{
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #e74c3c;
+    cursor: pointer;
+    display: flex;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  }
 }
