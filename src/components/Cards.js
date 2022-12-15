@@ -4,7 +4,7 @@ import './Cards.css';
 
 function Cards() {
   return (
-    <div className="cards">
+    <div className="cards" id="#content">
        <h1> Check out these EPIC Destinations!</h1>
          <div className="cards_container">
             <div className="cards_wrapper">
