@@ -5,6 +5,7 @@
      
      h1 {
        text-align: center;
+       margin-bottom: 25px;
      }
      
      .cards__container {
@@ -14,7 +15,7 @@
        max-width: 1120px;
        width: 90%;
        margin: 0 auto;
-       
+       border-radius: 10px;       
      }
      
      .cards__wrapper {
@@ -24,6 +25,7 @@
      
      .cards__items {
        margin-bottom: 24px;
+       border-radius: 10px;
      }
      
      .cards__item {
@@ -51,11 +53,13 @@
        width: 100%;
        padding-top: 67%;
        overflow: hidden;
+       border-radius: 10px;
      }
      
      .fade-img {
        animation-name: fade-img;
        animation-duration: 2s;
+       border-radius: 10px;
      }
      
      .cards__item__pic-wrap::after {
@@ -70,6 +74,7 @@
        color: #fff;
        background-color: #1f98f4;
        box-sizing: border-box;
+       
      }
      
      .cards__item__img {
@@ -85,6 +90,7 @@
        max-height: 100%;
        object-fit: cover;
        transition: all 0.2s linear;
+       border-radius: 10px;
      }
      
      .cards__item__img:hover {
@@ -93,6 +99,7 @@
      
      .cards__item__info {
        padding: 20px 30px 30px;
+       border-radius: 10px;
      }
      
      .cards__item__text {
