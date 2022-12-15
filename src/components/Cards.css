@@ -33,6 +33,7 @@
        flex: 1;
        margin: 0 1rem;
        border-radius: 10px;
+       box-shadow: 0 20px 20px rgba(56, 125, 255, 0.17);
      }
      
      .cards__item__link {
