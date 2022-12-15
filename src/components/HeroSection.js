@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <video src="/videos/video-1.mp4" autoPlay loop muted />
+      {/* <video src="/videos/video-1.mp4" autoPlay loop muted /> */}
       <h1> OurTrip </h1>
       <p>Let's explore the world</p>
       <div className='hero-btns'>
