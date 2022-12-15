@@ -1,10 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAddressCard, faAirFreshener } from '@fortawesome/free-solid-svg-icons'
-// class Footer extends React.Component { 
- import { FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa'
 
 function Footer() {
   return (
