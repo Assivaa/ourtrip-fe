@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa'
 
 function Footer() {
   return (
@@ -18,44 +19,34 @@ function Footer() {
            </div>
          </div>
        </div>
+          <h2 className='sosmed'> Social Media </h2>
            <div class="footer-link-items">
-              <h2> Social Media </h2>
-              <Link to='/'>instagram</Link>
-              <Link to='/'>Whatsapp</Link>
-           </div>
-         </div>
-       <section className="social-media">
-              <div className="social-media-wrap">
-                 <div className="footer-logo">
-                     <Link to='/' className="social-logo">
-                            OurTrip
-                     </Link>
-                     
-                 </div>
-                 
-                 <small className="website-rights">OurTrip © 2022</small>
-                 <div className="social-icons">
-                     <Link 
+              <Link 
                      className="social-icon-link Instagram"
-                     to='/'
+                     to={{pathname: ''}}
                      target="_blank"
-                     aria-label="Instagram"
+                     style={{marginRight:'20px', marginLeft:'40px'}}
                      >
-                     <i className='fab fa-instagram' />
-                     </Link>
-                     <Link 
+                     <FaInstagram/>
+              </Link>
+              <Link 
                      className="social-icon-link WhatsApp"
-                     to='/'
+                     to={{pathname: ''}}
                      target="_blank"
                      aria-label="WhatsApp"
                      >
-                     <i className='fab fa-whatsapp' />
-                     </Link>
-                     </div>
+                     <FaWhatsapp/>                     
+              </Link>
+                    
+           </div>
+         </div>
+       <section className="social-media">
+            <small className='website-rights'>OurTrip © 2022</small>
+              <div className="social-media-wrap">                                 
               </div>
               </section>
     </>
   )
 }
 
-export default Footer
+export default Footer;
