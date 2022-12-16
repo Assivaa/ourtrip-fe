@@ -7,6 +7,7 @@ import './App.css';
 import Home from './components/pages/Home';
 import Login from './components/pages/Login'; 
 import SignUp from './components/pages/SignUp';
+import CreatePost from './components/pages/CreatePost';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' exact element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/sign-up' element={<SignUp/>}/>
+          <Route exact path='/create-post' element={<CreatePost/>}/>
       </Routes> 
     </Router>
     </>
