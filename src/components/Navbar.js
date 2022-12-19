@@ -26,9 +26,9 @@ function Navbar() {
 
   return (
     <>
-       <nav className='navbar'>
+       <nav className='navbars'>
               <div className='navbar-container'>
-                <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+                <Link to="/" className="navbar-logo" onClick={closeMobileMenu} style={{textDecoration: 'none', color: "white"}}>
                      OurTrip <i className='fab fa-typo3' />
                 </Link>
                 <div className='menu-icon' onClick={handleClick}>
@@ -36,12 +36,12 @@ function Navbar() {
                 </div>
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                    <li className='nav-item'>
-                     <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                     <Link to='/' className='nav-links' onClick={closeMobileMenu} style={{textDecoration: 'none', color: "white"}}>
                             Home
                      </Link>
                    </li>
                    <li className='nav-item'>
-                     <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu}>
+                     <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu} style={{color: "white"}}>
                             Login
                      </Link>
                    </li>

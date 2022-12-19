@@ -68,35 +68,35 @@ function CreatePost() {
             <h1 className='title-form'><span>Create Post</span></h1>
             <div className="container">
                 <form>
-                    <div className="row">
-                        <div className="col-25">
+                    <div className="row mb-3">
+                        <div className="col-sm-1">
                             <label for="title">Title</label>
                         </div>
-                        <div className="col-75">
+                        <div className="col-sm-11">
                             <input type="text" id="title" name="title" placeholder="Title of your Post"/>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-25">
+                    <div className="row mb-3">
+                        <div className="col-sm-1">
                             <label for="place">Place</label>
                         </div>
-                        <div className="col-75">
+                        <div className="col-sm-11">
                             <input type="text" id="place" name="place" placeholder="Place you want to tell"/>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-25">
+                    <div className="row mb-3">
+                        <div className="col-sm-1">
                             <label for="image">Image</label>
                         </div>
-                        <div className="col-75">
+                        <div className="col-sm-11">
                             <input type="file" id="image" name="image" onChange={handleFileInputChange}/>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-25">
+                    <div className="row mb-3">
+                        <div className="col-sm-1">
                             <label for="content">Content</label>
                         </div>
-                        <div className="col-75">
+                        <div className="col-sm-11">
                             <ReactQuill 
                                 theme='snow' 
                                 modules={modules}

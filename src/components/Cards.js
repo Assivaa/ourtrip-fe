@@ -13,7 +13,7 @@ function Cards() {
               src="images/monas.jpg"
               text="Explore the famous icon Indonesia in Jakarta (Monumen Nasional)"
               label="Jakarta"
-              path="/jakarta"
+              path="/detail-post"
               />
                <CardItem 
               src="images/tsb.jpg"

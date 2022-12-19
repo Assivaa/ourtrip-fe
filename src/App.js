@@ -8,6 +8,7 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login'; 
 import SignUp from './components/pages/SignUp';
 import CreatePost from './components/pages/CreatePost';
+import DetailPost from './components/pages/DetailPost';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Route path='/' exact element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/sign-up' element={<SignUp/>}/>
-          <Route exact path='/create-post' element={<CreatePost/>}/>
+        <Route exact path='/create-post' element={<CreatePost/>}/>
+        <Route path='/detail-post' element={<DetailPost/>}/>
       </Routes> 
     </Router>
     </>
