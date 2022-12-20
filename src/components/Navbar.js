@@ -1,9 +1,30 @@
-import React, {useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
 
+import { logout } from '../redux/actions/auth';
+import { clearMessage } from '../redux/actions/message';
+
 function Navbar() {
+
+       const { user: currentUser } = useSelector((state) => state.auth);
+       const dispatch = useDispatch();
+
+       const location = useLocation();
+
+       useEffect(() => {
+              if(['/login', '/register'].includes(location.pathname)) {
+                     dispatch(clearMessage());
+              }
+       }, [dispatch, location]);
+
+       const handleLogout = useCallback(() => {
+              dispatch(logout());
+       }, [dispatch]);
+
+
        const [click, setClick] = useState(false);
        const [button, setButton] = useState(true);
 
@@ -40,13 +61,21 @@ function Navbar() {
                             Home
                      </Link>
                    </li>
-                   <li className='nav-item'>
-                     <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu} style={{color: "white"}}>
-                            Login
-                     </Link>
-                   </li>
+                   {currentUser ? (
+                     <li className='nav-item'>
+                            <Link to='/login' className='nav-links' onClick={handleLogout} style={{textDecoration: 'none', color: "white"}}>
+                                   Logout
+                            </Link>
+                     </li>
+                         ) : (
+                     <li className='nav-item'>
+                            <Link to='/login' className='nav-links' onClick={closeMobileMenu} style={{textDecoration: 'none', color: "white"}}>
+                                   Login
+                            </Link>
+                     </li>
+                         )}
                 </ul>
-                     {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+                     {/* {button && <Button buttonStyle='btn--outline'>LOG IN</Button>} */}
               </div>
        </nav>
     </>

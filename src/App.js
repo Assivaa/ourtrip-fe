@@ -13,7 +13,6 @@ import DetailPost from './components/pages/DetailPost';
 function App() {
   return (
     <>
-    <Router>
       <Navbar />
       <Routes>
         <Route path='/' exact element={<Home/>}/>
@@ -22,7 +21,6 @@ function App() {
         <Route exact path='/create-post' element={<CreatePost/>}/>
         <Route path='/detail-post' element={<DetailPost/>}/>
       </Routes> 
-    </Router>
     </>
   );
 }

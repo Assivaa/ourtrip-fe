@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../App.css";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
+import { login } from "../../redux/actions/auth";
 // import { Alert } from "react-bootstrap";
 
 function Login() {
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
+
+  const dispatch = useDispatch();
+
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+  };
+
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    dispatch(login(email, password))
+      .then(() => {
+        navigate("/");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
 
   return (
     // Make form validation for login
@@ -14,25 +54,14 @@ function Login() {
         <div className="login-container">
           <h1>Login</h1>
           <LForm
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (
-                e.target.email.value === "" ||
-                e.target.password.value === ""
-              ) {
-                alert("Please fill out all fields");
-                return;
-              } else {
-                alert("Login successful");
-                navigate("/");
-              }
-            }}
           >
             <LLabel htmlFor="email">Email</LLabel>
             <LInput
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={onChangeEmail}
               placeholder="Enter your email"
             />
             <LLabel htmlFor="password">Password</LLabel>
@@ -40,9 +69,25 @@ function Login() {
               type="password"
               id="password"
               name="password"
+              value={password}
+              onChange={onChangePassword}
               placeholder="Enter your password"
             />
-            <LButton type="submit">Login</LButton>
+
+            {message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
+              </div>
+            )}
+
+            <LButton type="submit" onClick={handleLogin} disabled={loading}>
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span> Login</span>
+            </LButton>
           </LForm>
           <P>
             Don't have an account? <LLink to="/sign-up">Sign Up</LLink>
