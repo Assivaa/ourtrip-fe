@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createPost } from '../../redux/actions/post';
 import '../CreatePost.css';
 
 function CreatePost() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { message } = useSelector(state => state.message);
+    const { user: currentUser } = useSelector((state) => state.auth);
+    
+    const user_id = currentUser.id;
+    const [title, setTitle] = useState('');
+    const [place, setPlace] = useState('');
+    const [image, setImage] = useState('');
+    const [content, setContent] = useState('');
+
     const [imageEncode, setImageEncode] = useState({
         file: null,
         base64URL: ""
     });
-    const [content, setContent] = useState('');
 
     const getBase64 = file => {
         return new Promise(resolve => {
@@ -18,7 +32,8 @@ function CreatePost() {
             reader.readAsDataURL(file);
             reader.onload = () => {
                 baseURL = reader.result;
-                console.log(baseURL);
+                // console.log(baseURL);
+                setImage(baseURL);
                 resolve(baseURL);
             };
         });
@@ -63,36 +78,80 @@ function CreatePost() {
         'link', 'image'
       ];
 
+    const onChangeTitle  = e => {
+        const title = e.target.value;
+        setTitle(title);
+    };
+    
+    const onChangePlace  = e => {
+        const place = e.target.value;
+        setPlace(place);
+    };
+    
+    const [success, setSuccess] = useState(false);
+    
+    const dataPost = {
+        user_id,
+        title,
+        place,
+        image,
+        content
+    };
+
+    const handleCreatePost = () => {
+        dispatch(createPost(dataPost))
+            .then(() => {
+                setSuccess(true);
+                setTimeout( () => navigate('/'),3000)
+            })
+            .catch(() => {
+                setSuccess(false);
+            })
+    };
+    
+    const handleSubmit = event => {
+        event.preventDefault();
+        handleCreatePost();
+    }
+
     return(
         <React.Fragment>
             <h1 className='title-form'><span>Create Post</span></h1>
+            
             <div className="container">
-                <form>
-                    <div className="row mb-3">
+            {message && (
+                        <div className="form-group row mb-3 mt-3" style={{marginRight: '20px', marginLeft: '20px'}}>
+                            <div className={`alert alert-${success ? 'success' : 'danger'}`} role="alert">
+                                {message}
+                            </div>
+                        </div>
+                    )}
+                <form onSubmit={handleSubmit}>
+                    <div className="row mb-3 form-group">
                         <div className="col-sm-1">
                             <label for="title">Title</label>
                         </div>
                         <div className="col-sm-11">
-                            <input type="text" id="title" name="title" placeholder="Title of your Post"/>
+                            <input type="text" className="form-control" id="title" name="title" value={title} onChange={onChangeTitle} placeholder="Title of your Post" required/>
                         </div>
                     </div>
-                    <div className="row mb-3">
+                    <div className="row mb-3 form-group">
                         <div className="col-sm-1">
                             <label for="place">Place</label>
                         </div>
                         <div className="col-sm-11">
-                            <input type="text" id="place" name="place" placeholder="Place you want to tell"/>
+                            <input type="text" className="form-control" id="place" name="place" value={place} onChange={onChangePlace} placeholder="Place you want to tell" required/>
                         </div>
                     </div>
-                    <div className="row mb-3">
+                    <div className="row mb-3 form-group">
                         <div className="col-sm-1">
                             <label for="image">Image</label>
                         </div>
                         <div className="col-sm-11">
-                            <input type="file" id="image" name="image" onChange={handleFileInputChange}/>
+                            <input type="file" className="form-control" id="image" name="image" onChange={handleFileInputChange} required/>
                         </div>
                     </div>
-                    <div className="row mb-3">
+                    <div className="row mb-3 form-group">
                         <div className="col-sm-1">
                             <label for="content">Content</label>
                         </div>
@@ -102,11 +161,12 @@ function CreatePost() {
                                 modules={modules}
                                 formats={formats}
                                 value={content} 
-                                onChange={setContent} />
+                                onChange={setContent} 
+                                required/>
                         </div>
                     </div>
-                    <div className="row">
-                        <input type="submit" value="Submit"/>
+                    <div className="row form-group">
+                        <button className='btn btn-primary'>Submit</button>
                     </div>
                 </form>
             </div> 

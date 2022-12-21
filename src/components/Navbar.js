@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback } from 'react'
+import React, {useState, useEffect, useCallback, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
@@ -15,7 +15,7 @@ function Navbar() {
        const location = useLocation();
 
        useEffect(() => {
-              if(['/login', '/register'].includes(location.pathname)) {
+              if(['/login', '/register', '/create-post'].includes(location.pathname)) {
                      dispatch(clearMessage());
               }
        }, [dispatch, location]);
@@ -62,11 +62,18 @@ function Navbar() {
                      </Link>
                    </li>
                    {currentUser ? (
+                     <React.Fragment>
+                     <li className='nav-item'>
+                            <Link to='/create-post' className='nav-links' onClick={closeMobileMenu} style={{textDecoration: 'none', color: "white"}}>
+                                   Create Post
+                            </Link>
+                     </li>
                      <li className='nav-item'>
                             <Link to='/login' className='nav-links' onClick={handleLogout} style={{textDecoration: 'none', color: "white"}}>
                                    Logout
                             </Link>
                      </li>
+                     </React.Fragment>
                          ) : (
                      <li className='nav-item'>
                             <Link to='/login' className='nav-links' onClick={closeMobileMenu} style={{textDecoration: 'none', color: "white"}}>
