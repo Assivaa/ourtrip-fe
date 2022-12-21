@@ -15,12 +15,12 @@ function Footer() {
        </section>
        <div className="footer-links">
          <div className="footer-link-wrapper">
-           <div class="footer-link-items">
+           <div className="footer-link-items">
            </div>
          </div>
        </div>
           <h2 className='sosmed'> Social Media </h2>
-           <div class="footer-link-items">
+           <div className="footer-link-items">
               <Link 
                      className="social-icon-link Instagram"
                      to= "//instagram.com/assiva._"

@@ -83,6 +83,7 @@ const SignUpContainer = styled.div`
       text-align: center;
       margin-bottom: 30px;
     }
+  }
 `;
 
 const SForm = styled.form`

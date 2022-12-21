@@ -1,4 +1,4 @@
-.navbar {
+.navbars {
        background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
        height: 80px;
        display: flex;
@@ -23,7 +23,7 @@
        justify-self: start;
        margin-left: 20px;
        cursor: pointer;
-       text-decoration: none;
+       text-decoration: none !important;
        font-size: 2rem;
        display: flex;
        align-items: center;
