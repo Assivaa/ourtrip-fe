@@ -1,37 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../App.css";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
+import { signup } from "../../redux/actions/auth";
+import { Alert } from "react-bootstrap";
 
 function SignUp() {
   const navigate = useNavigate();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+
+  const onChangeFirstName = (e) => {
+    const firstName = e.target.value;
+    setFirstName(firstName);
+  };
+
+  const onChangeLastName = (e) => {
+    const lastName = e.target.value;
+    setLastName(lastName);
+  };
+
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+  };
+
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    if (firstName === "" || lastName === "" || email === "" || password === "") {
+      alert("Please fill out all fields");
+    } else {
+      dispatch(signup(firstName, lastName, email, password))
+      .then(() => {
+        setSuccess(true);
+        alert("Sign up successful");
+        navigate("/login");
+      })
+      .catch(() => {
+        setSuccess(false);
+      });
+    }
+  };
+
   return (
     <>
       <SignUpContainer>
         <div className="signup-container">
           <h1>Sign Up</h1>
-        <SForm
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (
-              e.target.firstName.value === "" ||
-              e.target.lastName.value === "" ||
-              e.target.email.value === "" ||
-              e.target.password.value === ""
-            ) {
-              alert("Please fill out all fields");
-              return;
-            } else {
-              alert("Sign up successful");
-              navigate("/login");
-            }
-          }}
-        >
+        {!success && (
+          <SForm>
           <SLabel htmlFor="firstName">First Name</SLabel>
           <SInput
             type="text"
             id="firstName"
             name="firstName"
+            value={firstName}
+            onChange={onChangeFirstName}
             placeholder="Enter your first name"
           />
           <SLabel htmlFor="lastName">Last Name</SLabel>
@@ -39,6 +76,8 @@ function SignUp() {
             type="text"
             id="lastName"
             name="lastName"
+            value={lastName}
+            onChange={onChangeLastName}
             placeholder="Enter your last name"
           />
           <SLabel htmlFor="email">Email</SLabel>
@@ -46,6 +85,8 @@ function SignUp() {
             type="email"
             id="email"
             name="email"
+            value={email}
+            onChange={onChangeEmail}
             placeholder="Enter your email"
           />
           <SLabel htmlFor="password">Password</SLabel>
@@ -53,10 +94,17 @@ function SignUp() {
             type="password"
             id="password"
             name="password"
+            value={password}
+            onChange={onChangePassword}
             placeholder="Enter your password"
           />
-          <SButton type="submit">Sign Up</SButton>
+          <SButton type="submit" onClick={handleSignUp}> Sign Up </SButton>
         </SForm>
+        )}
+
+        {message && (
+          <Alert variant="danger">{message}</Alert>
+        )}
         <P> Already have an account? <SLink to="/login">Login</SLink></P>
         </div>
       </SignUpContainer>

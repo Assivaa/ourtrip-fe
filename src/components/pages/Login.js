@@ -28,6 +28,16 @@ function Login() {
     setPassword(password);
   };
 
+// checklogin function for form validation
+  const checkLogin = (e) => {
+    e.preventDefault();
+    if (email === "" || password === "") {
+      alert("Please fill all the fields");
+    } else {
+      handleLogin();
+    }
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -54,6 +64,8 @@ function Login() {
         <div className="login-container">
           <h1>Login</h1>
           <LForm
+            // Make form validation for login
+            onSubmit={checkLogin}
           >
             <LLabel htmlFor="email">Email</LLabel>
             <LInput
