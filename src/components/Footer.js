@@ -23,7 +23,7 @@ function Footer() {
            <div class="footer-link-items">
               <Link 
                      className="social-icon-link Instagram"
-                     to={{pathname: ''}}
+                     to= "//instagram.com/assiva._"
                      target="_blank"
                      style={{marginRight:'20px', marginLeft:'40px'}}
                      >
@@ -31,7 +31,7 @@ function Footer() {
               </Link>
               <Link 
                      className="social-icon-link WhatsApp"
-                     to={{pathname: ''}}
+                     to="//api.whatsapp.com/send?phone=6285899116057&text=Hi!%0ACan%20i%20recommended%20this%20place%20to%20be%20uploaded%20in%20OurTrip?%20"
                      target="_blank"
                      aria-label="WhatsApp"
                      >
