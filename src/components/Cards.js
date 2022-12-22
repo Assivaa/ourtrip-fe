@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import postService from '../services/post';
 import CardItem from './CardItem';
 import './Cards.css';
 
+const API_URL =  'https://sugary-gifted-enthusiasm.glitch.me/';
 function Cards() {
+  const navigate = useNavigate();
+  const toDetailPost = (postId) => {
+    navigate(`/detail-post/${postId}`)
+  }
+  const [allPost, setAllPost] = useState([]);
+
+  const getAllPosts =  async () => {
+    postService.getAll()
+      .then(response => {
+        setAllPost(response.data);
+      })
+      .catch(err => console.error(err))
+  };
+
+  useEffect(() => {
+    getAllPosts()
+  }, []);
+  const posts = allPost.data
   return (
     <div className="cards" id="#content">
        <h1> Check out these EPIC Destinations!</h1>
          <div className="cards_container">
             <div className="cards_wrapper">
-              <ul className="cards__items">
+              {/* <ul className="cards__items">
               <CardItem 
               src="images/monas.jpg"
               text="Explore the famous icon Indonesia in Jakarta (Monumen Nasional)"
@@ -42,7 +63,19 @@ function Cards() {
               label="Jakarta"
               path="/services"
               />
-              </ul>
+              </ul> */}
+              <ul className="cards__items">
+                {
+                  posts?.map((post) => (
+                    <CardItem 
+                    src={API_URL+post.image}
+                    text={post.title}
+                    label={post.place}
+                    path={toDetailPost(post.id)}
+                    />
+                  ))
+                }
+              </ul> 
              </div>
           </div>
       </div>
