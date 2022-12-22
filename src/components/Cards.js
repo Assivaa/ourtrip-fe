@@ -6,10 +6,10 @@ import './Cards.css';
 
 const API_URL =  'https://sugary-gifted-enthusiasm.glitch.me/';
 function Cards() {
-  const navigate = useNavigate();
-  const toDetailPost = (postId) => {
-    navigate(`/detail-post/${postId}`)
-  }
+  // const navigate = useNavigate();
+  // const toDetailPost = (postId) => {
+  //   navigate(`/detail-post/${postId}`)
+  // }
   const [allPost, setAllPost] = useState([]);
 
   const getAllPosts =  async () => {
@@ -68,10 +68,11 @@ function Cards() {
                 {
                   posts?.map((post) => (
                     <CardItem 
+                    key={post.id}
                     src={API_URL+post.image}
                     text={post.title}
                     label={post.place}
-                    path={toDetailPost(post.id)}
+                    path={"/detail-post/"+post.id}
                     />
                   ))
                 }

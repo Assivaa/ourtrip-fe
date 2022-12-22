@@ -1,15 +1,19 @@
 import '../DetailPost.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import postService from '../../services/post';
+import { useDispatch } from 'react-redux';
 
 const API_URL =  'https://sugary-gifted-enthusiasm.glitch.me/';
 function DetailPost() {
     const data = {};
     const [currentPost, setCurrentPost] = useState(data);
+    const location = useLocation();
     const params = useParams();
+    const dispatch = useDispatch();
     // const navigate = useNavigate();
+    // console.log(location)
 
     const getPost = id => {
         postService.get(id)
@@ -22,6 +26,7 @@ function DetailPost() {
     useEffect(() => {
         getPost(params.id);
     }, [params.id]);
+    // console.log(params.id)
 
     // console.log(currentPost.data);
     return (
