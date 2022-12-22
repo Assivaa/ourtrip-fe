@@ -19,7 +19,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/sign-up' element={<SignUp/>}/>
         <Route exact path='/create-post' element={<CreatePost/>}/>
-        <Route path='/detail-post' element={<DetailPost/>}/>
+        <Route path='/detail-post/:id' element={<DetailPost/>}/>
       </Routes> 
     </>
   );

@@ -1,7 +1,29 @@
 import '../DetailPost.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import postService from '../../services/post';
 
+const API_URL =  'https://sugary-gifted-enthusiasm.glitch.me/';
 function DetailPost() {
+    const data = {};
+    const [currentPost, setCurrentPost] = useState(data);
+    const params = useParams();
+    // const navigate = useNavigate();
+
+    const getPost = id => {
+        postService.get(id)
+            .then(response => {
+                setCurrentPost(response.data);
+            })
+            .catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        getPost(params.id);
+    }, [params.id]);
+
+    // console.log(currentPost.data);
     return (
         <section className='blog-posts grid-system'>
             <div className='container'>
@@ -12,17 +34,18 @@ function DetailPost() {
                         <div className="col-lg-12">
                         <div className="blog-post">
                             <div className="blog-thumb">
-                            <img src="images/monas.jpg" alt=""/>
+                            <img src={API_URL+currentPost.data.image} alt=""/>
                             </div>
                             <div className="down-content">
-                            <h4>Aenean pulvinar gravida sem nec</h4>
+                            <h4>{currentPost.data.title}</h4>
                             <ul className="post-info">
-                                <li><a href="google.com">Admin</a></li>
-                                <li><a href="google.com">May 12, 2020</a></li>
-                                <li><a href="#getComments">10 Comments</a></li>
+                                <li><a href="google.com">{currentPost.data.user_first_name+" "+currentPost.data.user_last_name}</a></li>
+                                <li><a href="google.com">{currentPost.data.createdAt.slice(0,15)}</a></li>
+                                <li><a href="#getComments">{currentPost.data.comments.length+" Comments"}</a></li>
                             </ul>
-                            <p>You can browse different tags such as <a rel="nofollow" href="https://templatemo.com/tag/multi-page" target="_parent">multi-page</a>, <a rel="nofollow" href="https://templatemo.com/tag/resume" target="_parent">resume</a>, <a rel="nofollow" href="https://templatemo.com/tag/video" target="_parent">video</a>, etc. to see more CSS templates. Sed hendrerit rutrum arcu, non malesuada nisi. Sed id facilisis turpis. Donec justo elit, dapibus vel ultricies in, molestie sit amet risus. In nunc augue, rhoncus sed libero et, tincidunt tempor nisl. Donec egestas, quam eu rutrum ultrices, sapien ante posuere nisl, ac eleifend eros orci vel ante. Pellentesque vitae eleifend velit. Etiam blandit felis sollicitudin vestibulum feugiat.
-                            <br/><br/>Donec tincidunt leo nec magna gravida varius. Suspendisse felis orci, egestas ac sodales quis, venenatis et neque. Vivamus facilisis dignissim arcu et blandit. Maecenas finibus dui non pulvinar lacinia. Ut lacinia finibus lorem vel porttitor. Suspendisse et metus nec libero ultrices varius eget in risus. Cras id nibh at erat pulvinar malesuada et non ipsum. Suspendisse id ipsum leo.</p>
+                            <div 
+                                dangerouslySetInnerHTML={{__html: currentPost.data.content}}
+                            />
                             {/* <div className="post-options">
                                 <div className="row align-items-end">
                                     <div className="col">
